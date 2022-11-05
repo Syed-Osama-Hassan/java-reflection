@@ -84,7 +84,7 @@ public class Main {
         return sb.toString();
     }
 
-    private static String formatPrimitiveValue(Object instance, Class<?> type) throws IllegalAccessException {
+    private static String formatPrimitiveValue(Object instance, Class<?> type) {
         if(type.equals(boolean.class)
         || type.equals(int.class)
         || type.equals(short.class)
