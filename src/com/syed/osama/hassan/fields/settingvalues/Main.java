@@ -5,6 +5,7 @@ import com.syed.osama.hassan.fields.settingvalues.data.UserInterfaceConfig;
 import com.syed.osama.hassan.restricted.classes.game.Game;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -36,6 +37,11 @@ public class Main {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] nameValuePair = line.split("=");
+
+            if(nameValuePair.length != 2) {
+                continue;
+            }
+
             String propertyName = nameValuePair[0];
             String propertyValue = nameValuePair[1];
 
@@ -47,11 +53,29 @@ public class Main {
                 continue;
             }
             field.setAccessible(true);
-            Object parseValue = parseValue(field.getType(), propertyValue);
+            Object parseValue;
+
+            if(field.getType().isArray()) {
+                parseValue = parseArray(field.getType().getComponentType(), propertyValue);
+            } else {
+                parseValue = parseValue(field.getType(), propertyValue);
+            }
+
             field.set(configInstance, parseValue);
         }
 
         return configInstance;
+    }
+
+    private static Object parseArray(Class<?> arrayObjectType, String value) {
+        String [] elements = value.split(",");
+        Object arrayObject = Array.newInstance(arrayObjectType, elements.length);
+
+        for(int i = 0; i < elements.length; i++) {
+            Array.set(arrayObject, i, parseValue(arrayObjectType, elements[i]));
+        }
+
+        return arrayObject;
     }
 
     private static Object parseValue(Class<?> type, String propertyValue) {

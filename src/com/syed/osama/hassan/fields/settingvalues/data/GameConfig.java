@@ -1,9 +1,21 @@
 package com.syed.osama.hassan.fields.settingvalues.data;
 
+import java.util.Arrays;
+
 public class GameConfig {
     private String gameName;
     private float price;
     private int releaseYear;
+    private String[] characterNames;
+
+
+    public String[] getCharacterNames() {
+        return characterNames;
+    }
+
+    public void setCharacterNames(String[] characterNames) {
+        this.characterNames = characterNames;
+    }
 
     public String getGameName() {
         return gameName;
@@ -35,6 +47,7 @@ public class GameConfig {
                 "gameName='" + gameName + '\'' +
                 ", price=" + price +
                 ", releaseYear=" + releaseYear +
+                ", characterNames=" + Arrays.toString(characterNames) +
                 '}';
     }
 }

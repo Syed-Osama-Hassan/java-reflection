@@ -1,9 +1,11 @@
 package com.syed.osama.hassan.fields.settingvalues.data;
 
+import java.util.Arrays;
+
 public class UserInterfaceConfig {
     private String titleColor;
     private String titleText;
-    private int titleFontSize;
+    private int[] titleFontSizes;
     private int footerFontSize;
 
 
@@ -23,12 +25,12 @@ public class UserInterfaceConfig {
         this.titleText = titleText;
     }
 
-    public int getTitleFontSize() {
-        return titleFontSize;
+    public int[] getTitleFontSizes() {
+        return titleFontSizes;
     }
 
-    public void setTitleFontSize(int titleFontSize) {
-        this.titleFontSize = titleFontSize;
+    public void setTitleFontSizes(int[] titleFontSizes) {
+        this.titleFontSizes = titleFontSizes;
     }
 
     public int getFooterFontSize() {
@@ -44,7 +46,7 @@ public class UserInterfaceConfig {
         return "UserInterfaceConfig{" +
                 "titleColor='" + titleColor + '\'' +
                 ", titleText='" + titleText + '\'' +
-                ", titleFontSize=" + titleFontSize +
+                ", titleFontSizes=" + Arrays.toString(titleFontSizes) +
                 ", footerFontSize=" + footerFontSize +
                 '}';
     }
